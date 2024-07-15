@@ -14,7 +14,7 @@ The main functions of this code is as follows:
 3. Deleting an entry via the DeleteEntry() function.
 4. Viewing the table via the ViewDatabase() function, also allows sorting via the SortBy() function and filtering via the FilterBy() function.
 5. Allows the restoration or permanent deletion of deleted entries via the Restoration() function.
-6. Change the school code via the ChangeSchoolCode() function.
+6. Change the school code via the ChangeSchoolCode() function (The school code is the part of the Studentid that is on the left side of the dash ('-') symbol).
 
 A few extra mini-features of this program are:
 1. All text-related inputs are turned into proper case using the AlphaChecker() function, which is used on almost all inputs where only letters are expected.
