@@ -8,6 +8,15 @@ You need to install the following for this to work:
 2. regex
 3. sys
 
+The columns on the table used for this project are:
+1. No.: This is a simple number that helps the user know what number to input to call its corresponding entry.
+2. Studentid: This registers the ID of the student. A dummy version is used in this project.
+3. Name: The name of the student.
+4. Surname: The surname of the student.
+5. Science: The science marks the student got in the exam.
+6. Math: The math marks the student got in the exam.
+7. English: The English marks the student got in the exam.
+
 The main functions of this code is as follows:
 1. Adding entries to the table via the AddStudent() function.
 2. Modifying single keys of an entry via the ModifyTarget() function.
