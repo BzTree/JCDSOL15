@@ -121,7 +121,7 @@ def ModifyTarget():
   print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
   while True:
     Row = DigitChecker('enter the number (No) of the student entry you want to modify')
-    if Row > len(FilteredStudentMarks) and Row < 0:
+    if Row > len(FilteredStudentMarks) and Row <= 0:
       print('That row is not present in this table. Please try again.')
       continue
     else:
