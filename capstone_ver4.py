@@ -69,7 +69,6 @@ def MarkChecker(Column):
       if mark > 100:
         print('Marks cannot be over 100. ')
       else:
-        int(mark)
         return mark
     else:
       print('Invalid input. Please input non-negative numbers only. ')
@@ -129,7 +128,6 @@ def ModifyTarget():
       Row = Row - 1
     while True:
       Column = AlphaChecker('enter the name of the column to modify')
-      Column.capitalize()
       if Column in ['No','Studentid']:
         print("Sorry, those columns can't be changed.")
         continue
@@ -188,7 +186,6 @@ def SortBy():
   print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
   while True:
     Column = AlphaChecker('enter column you would like to sort by')
-    Column = Column.capitalize()
     if Column not in FilteredStudentMarks[0].keys():
       print('That column is not present in the table. Please try again.')
       continue
@@ -229,7 +226,6 @@ def FilterBy():
     while True:
       print('What column would you like to filter by? ')
       Filter = AlphaChecker('enter column')
-      Filter.capitalize()
       if Filter in ['Studentid']:
         print("Sorry, we can't filter using this column as of now.")
         continue
@@ -258,7 +254,7 @@ def FilterBy():
         print('That column is not present in the table. Please try again.')
         continue
       FilteredStudentMarks = TempFSM
-      ReNo(TempFSM)
+      ReNo(FilteredStudentMarks)
       print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
       return
 
