@@ -18,11 +18,11 @@ import regex
 import sys
 
 # Dummy data
-StudentMarks = [{'No.':1, 'Studentid':'OL01-1', 'Name':'Mark', 'Surname':'Seagal', 'Science':90, 'Math':80, 'English':70},
-  {'No.':2, 'Studentid':'OL01-2', 'Name':'Anne', 'Surname':'Mason', 'Science':85, 'Math':77, 'English':99},
-  {'No.':3, 'Studentid':'OL01-3', 'Name':'John', 'Surname':'Horner', 'Science':88, 'Math':79, 'English':78},
-  {'No.':4, 'Studentid':'OL01-4', 'Name':'Jason', 'Surname':'Wankel', 'Science':90, 'Math':99, 'English':60},
-  {'No.':5, 'Studentid':'OL01-5', 'Name':'Mikhail', 'Surname':'Antonov', 'Science':99, 'Math':99, 'English':55}]
+StudentMarks = [{'No':1, 'Studentid':'OL01-1', 'Name':'Mark', 'Surname':'Seagal', 'Science':90, 'Math':80, 'English':70},
+  {'No':2, 'Studentid':'OL01-2', 'Name':'Anne', 'Surname':'Mason', 'Science':85, 'Math':77, 'English':99},
+  {'No':3, 'Studentid':'OL01-3', 'Name':'John', 'Surname':'Horner', 'Science':88, 'Math':79, 'English':78},
+  {'No':4, 'Studentid':'OL01-4', 'Name':'Jason', 'Surname':'Wankel', 'Science':90, 'Math':99, 'English':60},
+  {'No':5, 'Studentid':'OL01-5', 'Name':'Mikhail', 'Surname':'Antonov', 'Science':99, 'Math':99, 'English':55}]
 
 # Global variables
 TemporaryStorage = []
@@ -75,10 +75,10 @@ def MarkChecker(Column):
       print('Invalid input. Please input non-negative numbers only. ')
       continue
 
-# Reassigns the 'No.' Column for all entries whenever the table is rearranged, ensuring they always go in ascending order from the top.
+# Reassigns the 'No' Column for all entries whenever the table is rearranged, ensuring they always go in ascending order from the top.
 def ReID(FilteredStudentMarks):
   for i in range(len(FilteredStudentMarks)):
-    FilteredStudentMarks[i]['No.'] = i + 1
+    FilteredStudentMarks[i]['No'] = i + 1
     Counter = len(FilteredStudentMarks)
 
 # Lets the user go back to main() at any point in the program by pressing 'm'.
@@ -100,7 +100,7 @@ def ShowServices():
     print('9. Exit')
     print("Note: You can always return to this menu by pressing 'm'.")
 
-## Must haves:
+## Must have:
 ## Way to add new entry
 def AddStudent():
   Name = AlphaChecker('enter Name')
@@ -113,7 +113,7 @@ def AddStudent():
   ID = Counter
   global StudentIDCounter
   StudentIDCounter += 1
-  FilteredStudentMarks.append({'No.': ID, 'Studentid':SchoolCode+str(StudentIDCounter), 'Name': Name, 'Surname': Surname, 'Science': Science, 'Math': Math, 'English': English})
+  FilteredStudentMarks.append({'No': ID, 'Studentid':SchoolCode+str(StudentIDCounter), 'Name': Name, 'Surname': Surname, 'Science': Science, 'Math': Math, 'English': English})
   print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
   print('New entry successfully added.')
 
@@ -130,7 +130,7 @@ def ModifyTarget():
     while True:
       Column = AlphaChecker('enter the name of the column to modify')
       Column.capitalize()
-      if Column in ['No.','Studentid']:
+      if Column in ['No','Studentid']:
         print("Sorry, those columns can't be changed.")
         continue
       if Column in ['Name', 'Surname']:
@@ -159,6 +159,7 @@ def ViewSortFilterDatabase():
       print('Invalid input. Please input either 1 or 2.')
       continue
     return
+
 
 ## Way to delete entry
 def DeleteEntry():
@@ -230,13 +231,16 @@ def FilterBy():
         print('What column would you like to filter by? ')
         Filter = AlphaChecker('enter column')
         Filter.capitalize()
-        if Filter in ['Name', 'Surname']:
+        if Filter in ['Studentid']:
+          print("Sorry, we can't filter using this column as of now.")
+          continue
+        if Filter in ['Name','Surname']:
           FilterList = AlphaChecker('enter the starting letters of the names that will be kept')
           for i in range(len(FilteredStudentMarks)):
             if FilterList in FilteredStudentMarks[i][Filter]:
               TempFSM.append(FilteredStudentMarks[i])
-        elif Filter in ['Science', 'Math', 'English']:
-          FilterList = MarkChecker('enter the student')
+        elif Filter in ['No','Science','Math','English']:
+          FilterList = MarkChecker('enter the student number or')
           print('Do you want to show all results above or below this mark? ')
           print('Please press 1 for above')
           Sign = DigitChecker('press 2 for below')
@@ -308,7 +312,7 @@ def ChangeSchoolCode():
     print(f"School code succesfully changed. It is now '{SchoolCode}'.")
     return
 
-#main function that ties all the functions together
+###  Main function that ties all the functions together
 def main():
   print('Welcome to Student Marks Management System.')
   ShowServices()
