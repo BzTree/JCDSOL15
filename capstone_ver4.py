@@ -278,6 +278,8 @@ def Restoration():
           FilteredStudentMarks.append(TemporaryStorage[Row - 1])
           ReNo(FilteredStudentMarks)
           TemporaryStorage.pop(Row - 1)
+          global Counter
+          Counter += 1
           print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
           print('Entry successfully restored.')
           print('Would you like to restore more entries?')
