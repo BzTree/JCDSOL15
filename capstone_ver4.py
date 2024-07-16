@@ -293,7 +293,7 @@ def Restoration():
           else:
             print('This entry is neither Yes nor No.')
             continue
-      if Restore == 2:
+      elif Restore == 2:
         print('Are you sure you want to permanently delete these entries?')
         YesOrNo = AlphaChecker('enter Yes or No')
         if YesOrNo == 'Yes':
@@ -305,6 +305,9 @@ def Restoration():
         else:
           print('This entry is neither Yes nor No.')
           continue
+      else:
+        print('Invalid input. Please enter either 1 or 2.')
+        
 
 ### Ability to change school code
 def ChangeSchoolCode():
