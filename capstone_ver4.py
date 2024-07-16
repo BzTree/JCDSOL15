@@ -76,7 +76,7 @@ def MarkChecker(Column):
       continue
 
 # Reassigns the 'No' Column for all entries whenever the table is rearranged, ensuring they always go in ascending order from the top.
-def ReID(FilteredStudentMarks):
+def ReNo(FilteredStudentMarks):
   for i in range(len(FilteredStudentMarks)):
     FilteredStudentMarks[i]['No'] = i + 1
     Counter = len(FilteredStudentMarks)
@@ -121,7 +121,7 @@ def AddStudent():
 def ModifyTarget():
   print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
   while True:
-    Row = DigitChecker('enter the ID of the student entry you want to modify')
+    Row = DigitChecker('enter the number (No) of the student entry you want to modify')
     if Row > len(FilteredStudentMarks):
       print('That row is not present in this table. Please try again.')
       continue
@@ -166,15 +166,15 @@ def DeleteEntry():
   print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
   print('Which student entry do you want to delete?')
   while True:
-    Delete = DigitChecker('specify the ID of the row')
+    Delete = DigitChecker('specify the number (No) of the row')
     global Counter
     if Delete <= Counter and Delete > 0:
       Delete = int(Delete) - 1
       TemporaryStorage.append(FilteredStudentMarks[Delete])
       FilteredStudentMarks.pop(Delete)
       print('Entry successfully deleted.')
-      ReID(FilteredStudentMarks)
-      ReID(TemporaryStorage)
+      ReNo(FilteredStudentMarks)
+      ReNo(TemporaryStorage)
       Counter -= 1
       print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
       return
@@ -203,7 +203,7 @@ def SortBy():
       else:
         print('Invalid input. Please input either 1 or 2.')
         continue
-      ReID(FilteredStudentMarks)
+      ReNo(FilteredStudentMarks)
       print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
       print('Table successfully sorted.')
       return
@@ -219,7 +219,7 @@ def FilterBy():
         FilteredStudentMarks = StudentMarks
         print('Filter cleared.')
         print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
-        ReID(FilteredStudentMarks)
+        ReNo(FilteredStudentMarks)
       elif YesOrNo == 'No':
         print('Filter not cleared.')
         break
@@ -258,7 +258,7 @@ def FilterBy():
         print('That column is not present in the table. Please try again.')
         continue
       FilteredStudentMarks = TempFSM
-      ReID(TempFSM)
+      ReNo(TempFSM)
       print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
       return
 
@@ -274,13 +274,13 @@ def Restoration():
       print('Please press 1 for restoring')
       Restore = DigitChecker('press 2 for permanently deleting')
       if Restore == 1:
-        Row = DigitChecker('enter the ID of the row')
+        Row = DigitChecker('enter the number (No) of the row')
         if Row > len(TemporaryStorage):
           print('That row is not present in this table. Please try again.')
           continue
         else:
           FilteredStudentMarks.append(TemporaryStorage[Row - 1])
-          ReID(FilteredStudentMarks)
+          ReNo(FilteredStudentMarks)
           TemporaryStorage.pop(Row - 1)
           print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
           print('Entry successfully restored.')
