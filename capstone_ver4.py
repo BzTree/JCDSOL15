@@ -34,6 +34,7 @@ StudentIDCounter = len(FilteredStudentMarks)
 SchoolCode = 'OL01-'
 
 # Small Task Functions:
+# Checks if the input is only alphabets, then makes them proper case.
 def AlphaChecker(Column):
   while True:
     text = input(f'Please {Column}:')
@@ -46,6 +47,7 @@ def AlphaChecker(Column):
       text = text.capitalize()
       return text
 
+# Checks if the input is only digits, then turns them into 'int'.
 def DigitChecker(Column):
   while True:
     number = input(f'Please {Column}:')
@@ -57,6 +59,7 @@ def DigitChecker(Column):
       print('Invalid input. Please input non-negative numbers only. ')
       continue
 
+# DigitChecker() that disallows values over 100.
 def MarkChecker(Column):
   while True:
     mark = input(f'Please {Column} marks:')
@@ -72,16 +75,19 @@ def MarkChecker(Column):
       print('Invalid input. Please input non-negative numbers only. ')
       continue
 
+# Reassigns the 'No.' Column for all entries whenever the table is rearranged, ensuring they always go in ascending order from the top.
 def ReID(FilteredStudentMarks):
   for i in range(len(FilteredStudentMarks)):
     FilteredStudentMarks[i]['No.'] = i + 1
     Counter = len(FilteredStudentMarks)
 
+# Lets the user go back to main() at any point in the program by pressing 'm'.
 def GoBack(Thing):
   if Thing == 'm':
     print('returning to main menu...')
     main()
 
+# Lets the user see all the services available in main() by pressing '7'.
 def ShowServices():
     print('1. Add Student')
     print('2. Modify Student')
@@ -94,7 +100,7 @@ def ShowServices():
     print('9. Exit')
     print("Note: You can always return to this menu by pressing 'm'.")
 
-## Must have:
+## Must haves:
 ## Way to add new entry
 def AddStudent():
   Name = AlphaChecker('enter Name')
@@ -153,7 +159,6 @@ def ViewSortFilterDatabase():
       print('Invalid input. Please input either 1 or 2.')
       continue
     return
-
 
 ## Way to delete entry
 def DeleteEntry():
@@ -303,6 +308,7 @@ def ChangeSchoolCode():
     print(f"School code succesfully changed. It is now '{SchoolCode}'.")
     return
 
+#main function that ties all the functions together
 def main():
   print('Welcome to Student Marks Management System.')
   ShowServices()
