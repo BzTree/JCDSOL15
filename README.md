@@ -1,4 +1,4 @@
-This part of the README applies to the first capstone project only.
+A quick video explaining this capstone project can be found here: https://drive.google.com/file/d/1c5kUKqUnawoZQ5kLQOn7_1VhnbwWeK1Q/view?usp=sharing
 
 The code made for this project is made for teachers who want to keep track of the marks their students get at exams, with the assumption that the school's marks only go up to 100 and the teacher only has to take care of a class of students, though it is possible to use this
 for the whole school, but it might not work properly if this is the case.
