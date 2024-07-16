@@ -9,7 +9,7 @@ You need to install the following for this to work:
 3. sys
 
 The columns on the table used for this project are:
-1. No.: This is a simple number that helps the user know what number to input to call its corresponding entry.
+1. No: This is a simple number that helps the user know what number to input to call its corresponding entry.
 2. Studentid: This registers the ID of the student. A dummy Studentid is used in this project.
 3. Name: The name of the student.
 4. Surname: The surname of the student.
@@ -28,6 +28,6 @@ The main functions of this code is as follows:
 A few extra mini-features of this program are:
 1. All text-related inputs are turned into proper case using the AlphaChecker() function, which is used on almost all inputs where only letters are expected.
 2. Any inputs where only digits are expected use the DigitChecker() function. MarkChecker() has the same functionality plus a limit to disallow integers over 100.
-3. There is a ReID() function that refreshes the 'No.' column everytime the table's contents change (The Studentid column is not touched).
+3. There is a ReNo() function that refreshes the 'No' column everytime the table's contents change (The Studentid column is not touched).
 4. The GoBack() function is called in the AlphaChecker(), DigitChecker() and MarkChecker() functions to allow the user to go back to main() whenever they want.
 5. The ShowServices() function works only in the main() function, where it is used to bring up all the numbers that correspond to the services available in this code.
