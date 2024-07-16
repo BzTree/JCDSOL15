@@ -10,7 +10,7 @@ You need to install the following for this to work:
 
 The columns on the table used for this project are:
 1. No.: This is a simple number that helps the user know what number to input to call its corresponding entry.
-2. Studentid: This registers the ID of the student. A dummy version is used in this project.
+2. Studentid: This registers the ID of the student. A dummy Studentid is used in this project.
 3. Name: The name of the student.
 4. Surname: The surname of the student.
 5. Science: The science marks the student got in the exam.
