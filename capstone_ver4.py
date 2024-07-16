@@ -148,7 +148,7 @@ def ModifyTarget():
 def ViewSortFilterDatabase():
   print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
   while True:
-    print('Would you like to sort or filter? ')
+    print('Would you like to sort or filter?')
     print('Please press 1 for sorting')
     Sort = DigitChecker('press 2 for filtering')
     if Sort == 1:
@@ -213,7 +213,7 @@ def FilterBy():
     global FilteredStudentMarks
     TempFSM = []
     while FilteredStudentMarks != StudentMarks:
-      print('It seems that the current table is different from the saved one. Would you like to restore it?')
+      print('It seems that the current table is different from the unfiltered one. Would you like to restore the unfiltered one?')
       YesOrNo = AlphaChecker('enter Yes or No')
       if YesOrNo == 'Yes':
         FilteredStudentMarks = StudentMarks
@@ -224,44 +224,43 @@ def FilterBy():
         print('Filter not cleared.')
         break
       else:
-        print('This entry is neither Yes nor No. Please try again.')
+        print('This entry is neither Yes nor No.')
         continue
-    else:
-      while True:
-        print('What column would you like to filter by? ')
-        Filter = AlphaChecker('enter column')
-        Filter.capitalize()
-        if Filter in ['Studentid']:
-          print("Sorry, we can't filter using this column as of now.")
-          continue
-        if Filter in ['Name','Surname']:
-          FilterList = AlphaChecker('enter the starting letters of the names that will be kept')
+    while True:
+      print('What column would you like to filter by? ')
+      Filter = AlphaChecker('enter column')
+      Filter.capitalize()
+      if Filter in ['Studentid']:
+        print("Sorry, we can't filter using this column as of now.")
+        continue
+      if Filter in ['Name','Surname']:
+        FilterList = AlphaChecker('enter the starting letters of the names that will be kept')
+        for i in range(len(FilteredStudentMarks)):
+          if FilterList in FilteredStudentMarks[i][Filter]:
+            TempFSM.append(FilteredStudentMarks[i])
+      elif Filter in ['No','Science','Math','English']:
+        FilterList = MarkChecker('enter the student number or')
+        print('Do you want to show all results above or below this mark? ')
+        print('Please press 1 for above')
+        Sign = DigitChecker('press 2 for below')
+        if Sign == 1:
           for i in range(len(FilteredStudentMarks)):
-            if FilterList in FilteredStudentMarks[i][Filter]:
+            if FilteredStudentMarks[i][Filter] >= FilterList:
               TempFSM.append(FilteredStudentMarks[i])
-        elif Filter in ['No','Science','Math','English']:
-          FilterList = MarkChecker('enter the student number or')
-          print('Do you want to show all results above or below this mark? ')
-          print('Please press 1 for above')
-          Sign = DigitChecker('press 2 for below')
-          if Sign == 1:
-            for i in range(len(FilteredStudentMarks)):
-              if FilteredStudentMarks[i][Filter] >= FilterList:
-                TempFSM.append(FilteredStudentMarks[i])
-          elif Sign == 2:
-            for i in range(len(FilteredStudentMarks)):
-              if FilteredStudentMarks[i][Filter] <= FilterList:
-                TempFSM.append(FilteredStudentMarks[i])
-          else:
-            print('Invalid input. Please input either 1 or 2.')
-            continue
+        elif Sign == 2:
+          for i in range(len(FilteredStudentMarks)):
+            if FilteredStudentMarks[i][Filter] <= FilterList:
+              TempFSM.append(FilteredStudentMarks[i])
         else:
-          print('That column is not present in the table. Please try again.')
+          print('Invalid input. Please input either 1 or 2.')
           continue
-        FilteredStudentMarks = TempFSM
-        ReID(TempFSM)
-        print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
-        return
+      else:
+        print('That column is not present in the table. Please try again.')
+        continue
+      FilteredStudentMarks = TempFSM
+      ReID(TempFSM)
+      print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
+      return
 
 ### Ability to restore deleted entries, or delete them for good
 def Restoration():
@@ -276,20 +275,24 @@ def Restoration():
       Restore = DigitChecker('press 2 for permanently deleting')
       if Restore == 1:
         Row = DigitChecker('enter the ID of the row')
-        FilteredStudentMarks.append(TemporaryStorage[Row - 1])
-        ReID(FilteredStudentMarks)
-        TemporaryStorage.pop(Row - 1)
-        print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
-        print('Entry successfully restored.')
-        print('Would you like to restore more entries?')
-        YesOrNo = AlphaChecker('enter Yes or No')
-        if YesOrNo == 'Yes':
+        if Row > len(TemporaryStorage):
+          print('That row is not present in this table. Please try again.')
           continue
-        elif YesOrNo == 'No':
-          return
         else:
-          print('This entry is neither Yes nor No. ')
-          continue
+          FilteredStudentMarks.append(TemporaryStorage[Row - 1])
+          ReID(FilteredStudentMarks)
+          TemporaryStorage.pop(Row - 1)
+          print(tabulate(FilteredStudentMarks, headers = 'keys', tablefmt = 'pretty'))
+          print('Entry successfully restored.')
+          print('Would you like to restore more entries?')
+          YesOrNo = AlphaChecker('enter Yes or No')
+          if YesOrNo == 'Yes':
+            continue
+          elif YesOrNo == 'No':
+            return
+          else:
+            print('This entry is neither Yes nor No.')
+            continue
       if Restore == 2:
         print('Are you sure you want to permanently delete these entries?')
         YesOrNo = AlphaChecker('enter Yes or No')
@@ -300,7 +303,7 @@ def Restoration():
         elif YesOrNo == 'No':
           continue
         else:
-          print('This entry is neither Yes nor No. ')
+          print('This entry is neither Yes nor No.')
           continue
 
 ### Ability to change school code
@@ -308,9 +311,10 @@ def ChangeSchoolCode():
   global SchoolCode
   print(f"Current school code: '{SchoolCode}'")
   SchoolCode = input('enter new school code: ')
-  if regex.findall(r'-\b', SchoolCode) == []:
-    print(f"School code succesfully changed. It is now '{SchoolCode}'.")
-    return
+  if regex.findall(r'-', SchoolCode) == []:
+    SchoolCode = SchoolCode + '-'
+  print(f"School code succesfully changed. It is now '{SchoolCode}'.")
+  return
 
 ###  Main function that ties all the functions together
 def main():
